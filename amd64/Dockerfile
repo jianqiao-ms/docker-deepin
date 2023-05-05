@@ -81,7 +81,8 @@ ARG DEEPIN_ROOTFS
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV SHELL=/bin/bash
-ENV LANG=en_US.UTF-8
+ENV LANG=zh_CN.UTF-8
+ENV XMODIFIERS=@im=fcitx QT4_IM_MODULE=fcitx QT_IM_MODULE=fcitx GTK_IM_MODULE=fcitx
 
 COPY --from=builder $DEEPIN_ROOTFS /
 
@@ -104,4 +105,6 @@ RUN <<EOF cat > /etc/apt/sources.list.d/appstore.list
 deb https://com-store-packages.uniontech.com/appstore deepin appstore
 EOF
 
-RUN apt update
+RUN dpkg --add-architecture i386 && apt update
+
+
